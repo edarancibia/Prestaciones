@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Prestaciones.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Maestro de Prestaciones</title>
+    <meta charset="utf-8" />
+    <meta  http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/custom.css" rel="stylesheet"/>
+    <script src="Scripts/jquery-2.1.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+
+    <style type="text/css">
+    
+    #wrapper
+    {
+	    width: 1400px;
+	    background-color: white;
+	    margin: 0 auto;
+	    padding: 10px;
+	    border: 5px solid #dedede;
+				    
+    }
+    #header .bg-help { background: url('~/imagenes/bannernuevo.jpg') 50% 0 no-repeat; padding:1px 0; width:100%; min-height:100px; height:50px }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+          <div id="header" align="center">     
+            <img class="style1" src="imagenes/bannernuevo.jpg" />
+          </div> 
+    <div class="container">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+ 
+        </asp:ContentPlaceHolder>
+    </div>
+   
+</body>
+</html>

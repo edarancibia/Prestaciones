@@ -1,0 +1,14 @@
+c:\users\earancibia\documents\visual studio 2010\Projects\Prestaciones\Datos\bin\Debug\Datos.dll
+c:\users\earancibia\documents\visual studio 2010\Projects\Prestaciones\Datos\bin\Debug\Datos.pdb
+c:\users\earancibia\documents\visual studio 2010\Projects\Prestaciones\Datos\obj\Debug\Datos.dll
+c:\users\earancibia\documents\visual studio 2010\Projects\Prestaciones\Datos\obj\Debug\Datos.pdb
+c:\users\earancibia\documents\visual studio 2010\Projects\Prestaciones\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\Mono.Security.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\Npgsql.pdb
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\Npgsql.xml
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\de\Npgsql.resources.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\es\Npgsql.resources.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\earancibia\Documents\Visual Studio 2010\Projects\Prestaciones\Datos\bin\Debug\zh-CN\Npgsql.resources.dll
