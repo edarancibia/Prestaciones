@@ -11,28 +11,27 @@ body
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.foot
+{
+    float: right;    
+}
 </style>
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $("#<%=txtrut %>").keydown(function (event) {
-            if (event.shiftKey) {
-                event.preventDefault();
-            }
-
-            if (event.keyCode == 46 || event.keyCode == 8) {
-            }
-            else {
-                if (event.keyCode < 95) {
-                    if (event.keyCode < 48 || event.keyCode > 57) {
-                        event.preventDefault();
-                    }
+        $("#<%=btnenvia.ClientID%>").click(function () {
+            var a = $('#<%=txtcuerpo.ClientID %>').val();
+            if (a != "") {
+                if (confirm("¿Confirma que desea enviar el mensaje?")) {
+                    return true;
+                } else {
+                    return false;
                 }
-                else {
-                    if (event.keyCode < 96 || event.keyCode > 105) {
-                        event.preventDefault();
-                    }
-                }
+            } else {
+                alert("Ingrese sus comentarios.");
+                $("#<%=txtcuerpo.ClientID %>").focus();
+                return false;
             }
         });
     });
@@ -50,12 +49,12 @@ body
                         ControlToValidate="txtrut" Font-Bold="True" Font-Size="Small" ForeColor="Red"></asp:RequiredFieldValidator>
                     <h5> Digite Rut sin puntos ni digito verificador.</h5>
                     <h5>Ejem: 14785985</h5>
+
                 </div>
                 <div class="col-xs-2">
-
-                        <asp:Label ID="lblText" runat="server" Text=""></asp:Label>
-                        <asp:Button ID="Button1" runat="server" Text="Buscar" 
-                        class="btn btn-info" onclick="btnok_Click" />       
+                   <asp:Button ID="Button1" runat="server" Text="Buscar" 
+                     class="btn btn-info" onclick="btnok_Click" />                  
+     
                 </div>
 
                 <div class="col-xs-3">
@@ -63,7 +62,7 @@ body
                 </div>
 
                 <div class="col-xs-2">
-                    <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click">Resultado de exámenes</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click">Exámenes en línea</asp:LinkButton>
                     <asp:ImageButton ID="ImageButton1" runat="server" 
                         ImageUrl="~/imagenes/news-exm.ico" onclick="ImageButton1_Click" ToolTip="Ir a resultado de exámenes en línea" />
                 </div>
@@ -160,17 +159,39 @@ body
 			 <div class="row">
 			  	<div class="form-group">
 			  	 <div class="col-lg-3">
-                       <asp:TextBox ID="txtcuerpo" runat="server" TextMode="MultiLine" Rows="4" Columns="70"></asp:TextBox>
+                       <asp:TextBox ID="txtcuerpo" runat="server" TextMode="MultiLine" Rows="4" Columns="70">
+                       </asp:TextBox>
+                       <br />
+                   <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                      <ProgressTemplate>
+                          Enviando...<asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/mail_gif.gif" />
+                      </ProgressTemplate>
+                  </asp:UpdateProgress>
+
 			  	</div>
-			  	
 			   </div>
 			 </div>
 
 			 <br/>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <asp:Button ID="btnenvia" runat="server" Text="Enviar" class="btn btn-info" 
-                  onclick="btnenvia_Click" />
+          <asp:ScriptManager ID="ScriptManager1" runat="server">
+           </asp:ScriptManager>
+           <div class="form-group" id="foot">
+           
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+
+            <div class="col-xs-2">
+                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                     <asp:Button ID="btnenvia" runat="server" Text="Enviar" class="btn btn-info" 
+                    onclick="btnenvia_Click" />
+                    </ContentTemplate> 
+                </asp:UpdatePanel>
+            </div>
+           </div>
+
 	      </div>
    
 	    </div>

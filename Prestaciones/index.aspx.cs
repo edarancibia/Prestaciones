@@ -8,6 +8,7 @@ using System.Data;
 using System.Collections;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net.Mail;
 
 namespace Prestaciones
 {
@@ -168,11 +169,11 @@ namespace Prestaciones
 
         protected void btnenvia_Click(object sender, EventArgs e)
         {
-            objFunc.para = "erwin.arancibia@clinicale.cl";
-            objFunc.para2 = "erwin2211@hotmail.com";
+            objFunc.para = "prestacionescbo@gmail.com";
             objFunc.asunto = "Solicitud de exámenes";
             objFunc.cuerpo = txtcuerpo.Text;
             objFunc.enviaCorreo();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#myModal').modal('hide');", true);
         }
 
     }

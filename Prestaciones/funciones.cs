@@ -18,28 +18,36 @@ namespace Prestaciones
     public class funciones
     {
         public string nombre;
-        public string para,para2;
+        public string para;
         public string asunto;
         public string cuerpo;
         public MailMessage correo;
 
         public void enviaCorreo()
         {
-            //correo.IsBodyHtml = true;
-
-            correo = new MailMessage();
-            correo.To.Add(new MailAddress(this.para,this.para2));
-            correo.From = new MailAddress("gestioncamascbo@outlook.com");
-            correo.Subject = asunto;
-            correo.Body = cuerpo;
-            correo.IsBodyHtml = false;
-
-            SmtpClient client = new SmtpClient("smtp.live.com", 587);
-            using (client)
+            try
             {
-                client.Credentials = new System.Net.NetworkCredential("gestioncamascbo@outlook.com", "camas1530");
-                client.EnableSsl = true;
-                client.Send(correo);
+                //correo.IsBodyHtml = true;
+                correo = new MailMessage();
+                correo.To.Add(new MailAddress(this.para));
+                correo.From = new MailAddress("prestacionescbo@outlook.com");
+                correo.Subject = asunto;
+                correo.Body = cuerpo;
+                correo.IsBodyHtml = false;
+
+                //SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
+                SmtpClient client = new SmtpClient("smtp.live.com", 587);
+                using (client)
+                //using(SmtpClient client = new SmtpClient("smtp.live.com", 25))
+                {
+                    client.Credentials = new System.Net.NetworkCredential("prestacionescbo@outlook.com", "prestaciones1530");
+                    client.EnableSsl = true;
+                    client.Send(correo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         

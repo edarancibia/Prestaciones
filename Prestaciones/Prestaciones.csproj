@@ -59,7 +59,9 @@
     <Content Include="imagenes\cliente.png" />
     <Content Include="imagenes\Excel-icon.png" />
     <Content Include="imagenes\logo.jpg" />
+    <Content Include="imagenes\mail_gif.gif" />
     <Content Include="imagenes\news-exm.ico" />
+    <Content Include="imagenes\send_email_icon.gif" />
     <Content Include="index.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
