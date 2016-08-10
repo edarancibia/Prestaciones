@@ -56,6 +56,7 @@
     <Content Include="Content\custom.css" />
     <Content Include="imagenes\atencion-al-cliente-300x300.png" />
     <Content Include="imagenes\bannernuevo.jpg" />
+    <Content Include="imagenes\cargando.gif" />
     <Content Include="imagenes\cliente.png" />
     <Content Include="imagenes\Excel-icon.png" />
     <Content Include="imagenes\logo.jpg" />

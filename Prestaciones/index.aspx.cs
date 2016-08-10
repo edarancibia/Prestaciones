@@ -122,9 +122,9 @@ namespace Prestaciones
         {
             if (e.Row.RowType == DataControlRowType.Header)
             {
-                e.Row.Cells[1].Text = "Médico";
-                e.Row.Cells[2].Text = "Especialidad";
-                e.Row.Cells[3].Text = "Sucursal";
+                e.Row.Cells[1].Text = "Profesional";
+                //e.Row.Cells[2].Text = "Especialidad";
+                e.Row.Cells[2].Text = "Lugar de atención";
                 
             }
 
@@ -170,8 +170,15 @@ namespace Prestaciones
         protected void btnenvia_Click(object sender, EventArgs e)
         {
             objFunc.para = "prestacionescbo@gmail.com";
-            objFunc.asunto = "Solicitud de exámenes";
+            objFunc.para2 = "tamara.espinoza@clinicale.cl";
+            objFunc.asunto = "Solicitud de resgistros clínicos";
             objFunc.cuerpo = txtcuerpo.Text;
+            objFunc.cuerpo = objFunc.cuerpo + "<br/>";
+            objFunc.cuerpo = objFunc.cuerpo + txtcuerpoexa.Text;
+            objFunc.cuerpo = objFunc.cuerpo + "<br/>";
+            objFunc.cuerpo= objFunc.cuerpo + "Solicitado por: " + txtnomsoli.Text + " "+ " Rut: " + txtrutsoli.Text;
+            objFunc.cuerpo = objFunc.cuerpo + "<br/><br/>";
+            objFunc.cuerpo =  objFunc.cuerpo + "Enviado automaticamente desde sistema de Ficha clinica única.";
             objFunc.enviaCorreo();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#myModal').modal('hide');", true);
         }

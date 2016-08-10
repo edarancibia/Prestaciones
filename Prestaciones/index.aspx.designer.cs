@@ -148,6 +148,24 @@ namespace Prestaciones {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
+        /// Control txtnrofi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtnrofi;
+        
+        /// <summary>
+        /// Control txtunidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtunidad;
+        
+        /// <summary>
         /// Control txtcuerpo.
         /// </summary>
         /// <remarks>
@@ -155,6 +173,33 @@ namespace Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcuerpo;
+        
+        /// <summary>
+        /// Control txtcuerpoexa.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtcuerpoexa;
+        
+        /// <summary>
+        /// Control txtrutsoli.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtrutsoli;
+        
+        /// <summary>
+        /// Control txtnomsoli.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtnomsoli;
         
         /// <summary>
         /// Control UpdateProgress1.

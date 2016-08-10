@@ -16,6 +16,12 @@ body
 {
     float: right;    
 }
+
+.btnexa
+{
+    font-size: 12px;    
+}
+
 </style>
 <script type="text/javascript">
 
@@ -24,6 +30,10 @@ body
             var a = $('#<%=txtcuerpo.ClientID %>').val();
             if (a != "") {
                 if (confirm("¿Confirma que desea enviar el mensaje?")) {
+                    var rut_sol = $('#<%=txtrutsoli.ClientID %>').text();
+                    var nom_soli = $('#<%=txtnomsoli.ClientID %>').text();
+                    var msj1 = $('#<%=txtcuerpo.ClientID %>').text();
+                    $('#<%=txtcuerpo.ClientID %>').text(msj1 + ' ' + 'Solicitado por: ' + nom_soli + rut_sol);
                     return true;
                 } else {
                     return false;
@@ -34,14 +44,68 @@ body
                 return false;
             }
         });
+
+        $("#<%=Button1.ClientID%>").click(function () {
+            var rut = $("#<%=txtrut.ClientID%>").val();
+            if (rut == '') {
+                alert('Digite Rut!');
+                return false;
+            }
+        });
+
+        $('#<%=txtnrofi.ClientID%>').hide();
+        $('#<%=txtunidad.ClientID%>').hide();
     });
+
+    $(document).ready(function () {
+        var paciente = $('#<%=lblnombre.ClientID%>').text();
+        var ckbox = $('#Checkbox1');
+        var msj = $('#<%=txtcuerpo.ClientID%>').text();
+
+        $('#Checkbox1').on('click', function () { //check ficha
+            if (ckbox.is(':checked')) {
+                $('#<%=txtnrofi.ClientID%>').show();
+                $('#<%=txtnrofi.ClientID%>').focus();
+
+
+                //var nrofi = $('#<%=txtnrofi.ClientID%>').val();
+                $('#<%=txtcuerpo.ClientID %>').val(msj + ' ficha' + ' ' + paciente);
+
+                $('#<%=txtnrofi.ClientID%>').blur(function () {
+                    var ficha = $('#<%=txtnrofi.ClientID%>').val();
+                    $('#<%=txtcuerpo.ClientID %>').val(msj + 'ficha N° ' + ficha + ' ' + 'del paciente ' + ' ' + paciente);
+                });
+
+            } else {
+                $('#<%=txtnrofi.ClientID%>').hide();
+                $('#<%=txtcuerpo.ClientID %>').val('');
+            }
+        });
+
+        $('#Checkbox2').on('click', function () { //check examenes
+            var ckbox = $('#Checkbox2');
+            if (ckbox.is(':checked')) {
+                $('#<%=txtunidad.ClientID%>').show();
+
+                $('#<%=txtunidad.ClientID%>').blur(function () {
+                    var unidad = $('#<%=txtunidad.ClientID%>').val();
+                    $('#<%=txtcuerpoexa.ClientID %>').val(msj + ' exámen' + ' ' + unidad + ' ' + 'del paciente ' + paciente + '. Fecha: ');
+                })
+
+            } else {
+                $('#<%=txtunidad.ClientID%>').hide();
+                $('#<%=txtcuerpoexa.ClientID %>').val('');
+            }
+        });
+    })
+
 
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form name="form1" runat="server">
+    <br />
         <div class="row">
-        <br />
             <div class="form-group">
                 <div class="col-xs-3">
                     <asp:TextBox ID="txtrut" runat="server" placeholder="Ficha" class="form-control" MaxLength="8" ></asp:TextBox><asp:RequiredFieldValidator
@@ -53,7 +117,7 @@ body
                 </div>
                 <div class="col-xs-2">
                    <asp:Button ID="Button1" runat="server" Text="Buscar" 
-                     class="btn btn-info" onclick="btnok_Click" />                  
+                     class="btn btn-info" onclick="btnok_Click" data-toggle="modal" data-target="#myModal2" />       
      
                 </div>
 
@@ -68,7 +132,7 @@ body
                 </div>
 
                 <div class="col-xs-2">
-                    <input id="btnmodal" type="button" value="Solicitar exámenes" class="btn btn-info" data-toggle="modal" data-target="#myModal" />
+                    <input id="btnmodal" type="button" value="Solicitar registros clínicos" class="btn btn-info btnexa" data-toggle="modal" data-target="#myModal" />
                 </div>
             </div>
             </div>
@@ -76,28 +140,31 @@ body
             <div>
                 <strong><asp:Label ID="lblerror" runat="server" Text="Label"></asp:Label></strong>
             </div>
-            <br />
 
             <div id="contenido" runat="server">
             <div class="row">
             <div class="form-group">
                 <div class="col-md-3">
-                    <h5><strong>Hopitalizaciones</strong></h5>
-                    <asp:GridView ID="dgvhosp" runat="server" class="table table-hover table-responsive" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+                    <h5><strong>Hospitalizaciones</strong></h5>
+                    <div  style="height: 300px; overflow: scroll">
+                        <asp:GridView ID="dgvhosp" runat="server" class="table table-hover table-responsive" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                         RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000">
-                    </asp:GridView>
+                        </asp:GridView>
+                    </div>
                 </div>
 
                 <div class="col-md-3">
                 <h5><strong>Urgencias</strong></h5>
+                  <div  style="height: 300px; overflow: scroll">
                     <asp:GridView ID="dgvUrgencia" runat="server" class="table table-hover table-responsive" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                         RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000">
                     </asp:GridView>
+                  </div>
                 </div>
 
                 <div class="col-md-3">
-                   <div  style="height: 300px; overflow: scroll">
-                    <h5><strong>Exámenes</strong></h5>
+                    <h5><strong>Exámenes y procedimientos</strong></h5>
+                    <div  style="height: 300px; overflow: scroll">
                         <asp:GridView ID="dgvexam" runat="server" class="table table-hover table-responsive" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                         RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000">
                         </asp:GridView>
@@ -105,29 +172,33 @@ body
                 </div>
 
                 <div class="col-md-3">
-                    <h5><strong>Otras atenciones ambulatorias</strong></h5>
+                    <h5><strong>Atenciones de enfermería</strong></h5>
+                    <div  style="height: 300px; overflow: scroll">
                     <asp:GridView ID="dgvambula" runat="server" class="table table-hover table-responsive" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                         RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000">
                     </asp:GridView>
+                    </div>
                 </div>
                 
             </div>
             </div>
-            <br /><br /> 
+            <br />
 
             <div class="row">
                 <div class="form-group">
                     <div class="col-md-3">
                         <h5><strong> Imagenología desde 1-07-2015</strong></h5>
+                        <div  style="height: 300px; overflow: scroll">
                         <asp:GridView ID="dgvtoth" runat="server" 
                             class="table table-hover table-responsive" 
                             onrowdatabound="dgvtoth_RowDataBound" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                         RowStyle-BackColor="#A1DCF2" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000">
                         </asp:GridView>
+                        </div>
                     </div>
 
                     <div class="col-md-3" style="width:800px">
-                        <h5><strong>Consultas médicas</strong></h5>
+                        <h5><strong>Atenciones ambulatorias</strong></h5>
                         <div style="height: 200px; overflow: scroll; width: 800px" >
                         <asp:GridView ID="dgvconsul" runat="server" 
                             class="table table-hover table-responsive"  
@@ -151,28 +222,75 @@ body
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Enviar solicitud de resultados de exámenes a archivo</h4>
+	        <h4 class="modal-title" id="myModalLabel">Enviar solicitud de registros clínicos</h4>
 	      </div>
 	      <div class="modal-body">
                
 			<br/>
+
+                <div class="row">
+                  <div class="form-group">
+                      <div class="col-xs-2">
+                          Ficha
+                          <input id="Checkbox1" type="checkbox" />
+                      </div>
+
+                      <div class="col-xs-2">
+                          Exámen
+                          <input id="Checkbox2" type="checkbox" />
+                      </div>           
+                  </div>
+              </div>
+              <br />
+
+              <div class="row">
+                  <div class="form-group">
+                      <div class="col-xs-3">
+                          <asp:TextBox ID="txtnrofi" runat="server" class="form-control" placeholder="Nro Ingreso"></asp:TextBox>
+                      </div>
+                      <div class="col-xs-3">
+                          <asp:TextBox ID="txtunidad" runat="server" class="form-control" placeholder="Unidad"></asp:TextBox>
+                      </div>
+                  </div>
+              </div>
+
+             <br />
+
 			 <div class="row">
 			  	<div class="form-group">
-			  	 <div class="col-lg-3">
-                       <asp:TextBox ID="txtcuerpo" runat="server" TextMode="MultiLine" Rows="4" Columns="70">
+			  	 <div class="col-lg-10">
+                       <asp:TextBox ID="txtcuerpo" runat="server" TextMode="MultiLine" Rows="2" Columns="70" class="form-control" Text="Solicito : ">
                        </asp:TextBox>
                        <br />
-                   <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                      <asp:TextBox ID="txtcuerpoexa" runat="server" TextMode="MultiLine" Rows="2" Columns="70" class="form-control" Text="Solicito : ">
+                       </asp:TextBox>
+                       <br />
+                  
+			  	</div>
+			   </div>
+			 </div>
+
+              <br />
+
+              <div class="row">
+                  <div class="form-group">
+                      <div class="col-xs-3">
+                         <asp:TextBox ID="txtrutsoli" runat="server" placeholder="Rut" class="form-control"></asp:TextBox>
+                      </div>
+                      <div class="col-md-6">
+                        <asp:TextBox ID="txtnomsoli" runat="server" placeholder="Nombre de quien solicita" class="form-control"></asp:TextBox>
+                      </div>
+                  </div>
+              </div>
+
+			 <br/>
+
+              <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                       <ProgressTemplate>
                           Enviando...<asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/mail_gif.gif" />
                       </ProgressTemplate>
                   </asp:UpdateProgress>
 
-			  	</div>
-			   </div>
-			 </div>
-
-			 <br/>
 	      <div class="modal-footer">
           <asp:ScriptManager ID="ScriptManager1" runat="server">
            </asp:ScriptManager>
@@ -198,6 +316,18 @@ body
 	  </div>
 	</div>	
     </div>
+
+    <!--MODAL CARGANDO... -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+       <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="modalCarga">
+                <img src="imagenes/cargando.gif" alt="Alternate Text" style="display:block;margin:0 auto 0 auto;" />
+            </div>
+        </div>
+       </div>
+    </div>
+
     </asp:Panel>
     </form>
    

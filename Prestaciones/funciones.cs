@@ -18,7 +18,7 @@ namespace Prestaciones
     public class funciones
     {
         public string nombre;
-        public string para;
+        public string para,para2;
         public string asunto;
         public string cuerpo;
         public MailMessage correo;
@@ -27,13 +27,13 @@ namespace Prestaciones
         {
             try
             {
-                //correo.IsBodyHtml = true;
                 correo = new MailMessage();
                 correo.To.Add(new MailAddress(this.para));
+                correo.CC.Add(new MailAddress(this.para2));
                 correo.From = new MailAddress("prestacionescbo@outlook.com");
                 correo.Subject = asunto;
                 correo.Body = cuerpo;
-                correo.IsBodyHtml = false;
+                correo.IsBodyHtml = true;
 
                 //SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
                 SmtpClient client = new SmtpClient("smtp.live.com", 587);
@@ -140,7 +140,7 @@ namespace Prestaciones
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["cnsicbo"].ConnectionString))
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT A.NRO_FI as 'Nro Ingreso',CONVERT(char(10), A.FECHA, 103) Fecha FROM FICHA A,FIC_PAC B WHERE A.NRO_FI=B.NRO_FI AND B.RUT_NUM=@rut ORDER BY A.FECHA DESC", con);
+                SqlCommand cmd = new SqlCommand("SELECT A.NRO_FI as 'Nro Ingreso',CONVERT(char(10), A.FECHA, 102) Fecha FROM FICHA A,FIC_PAC B WHERE A.NRO_FI=B.NRO_FI AND a.NRO_FI < 600000 AND B.RUT_NUM=@rut ORDER BY A.FECHA DESC", con);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 cmd.Parameters.AddWithValue("rut", rut);
@@ -215,7 +215,7 @@ namespace Prestaciones
                                                   FROM HCE_AMB_END,HCE_AMB_ANT_MOR
                                                   WHERE RUT_NUM=@rut AND ID_END=FK_ID_END AND TIPO=4 AND HCE_AMB_END.ESTADO=1 AND HCE_AMB_END.ESTADO1=1
 
-                                                  ORDER BY FECHA", con);
+                                                  ORDER BY FECHA DESC", con);
                 cmd.Parameters.AddWithValue("@rut", rut);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
 
@@ -249,7 +249,7 @@ namespace Prestaciones
 
             System.Data.Odbc.OdbcConnection con = new System.Data.Odbc.OdbcConnection("Driver={FileMaker ODBC};Server=192.168.1.187;Database=AG_02; UID=cao2016;PWD=cao2016");
             con.Open();
-            OdbcCommand cmd = new OdbcCommand("SELECT Horas.Fecha, Horas.\"Nombre Completo Medico en Horas\", Horas.\"Especialidad Medico\", Horas.Sucursal_Hora  FROM Horas WHERE (Horas.\"Rut Paciente\"=" + rut + ") ORDER BY Horas.Fecha DESC", con);
+            OdbcCommand cmd = new OdbcCommand("SELECT Horas.Fecha, Horas.\"Nombre Completo Medico en Horas\", Horas.Sucursal_Hora  FROM Horas WHERE (Horas.\"Rut Paciente\"=" + rut + ") ORDER BY Horas.Fecha DESC", con);
 
             OdbcDataAdapter da = new OdbcDataAdapter(cmd);
             cmd.Parameters.AddWithValue("rut", rut);
